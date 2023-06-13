@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import burritoImg from "../images/burrito-bowl.jpg";
+import Side from "./Side";
 
 function Order(props) {
   const [isClicked, setIsClicked] = useState(false);
 
   function handleClick() {
-    isClicked = !isClicked;
+    setIsClicked(!isClicked);
   }
 
   return (
@@ -16,28 +17,20 @@ function Order(props) {
       <div className="content">
         <b>Protein:</b>
         <br />
-        {props.protein.length > 0 ? props.protein.join(", ") : "None"}
+        {props.order.protein.length > 0 ? props.order.protein.join(", ") : "None"}
         <br />
         <b>Fillings:</b>
         <br />
-        {props.fillings.length > 0 ? props.fillings.join(", ") : "None"}
+        {props.order.fillings.length > 0 ? props.order.fillings.join(", ") : "None"}
         <br />
         <b>Toppings:</b>
         <br />
-        {props.toppings.length > 0 ? props.toppings.join(", ") : "None"}
+        {props.order.toppings.length > 0 ? props.order.toppings.join(", ") : "None"}
         <br />
       </div>
       <div className="extra content">
-        {props.sides.length > 0 ? (
-          <button className="ui button small" onClick={handleClick}>
-            View Sides
-          </button>
-        ) : (
-          <p>No sides</p>
-        )}
-
-        {/* this is just a shortcut to writing state.isClicked ? <Side sides={props.sides} /> : null */}
-        {state.isClicked && <Side sides={props.sides} />}
+        {props.order.sides.length > 0 ? (<button className="ui button small" onClick={handleClick}>View Sides</button>) : (<p>No sides</p>)}
+        {isClicked ? <Side sides={props.order.sides} /> : null}
       </div>
     </div>
   );
